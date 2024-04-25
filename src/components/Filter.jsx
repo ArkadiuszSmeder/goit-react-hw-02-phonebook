@@ -1,7 +1,7 @@
 import "./label.css"
 import { nanoid } from "nanoid";
 
-export const Filter = ({ name, value, onChange, type, label}) => {
+export const Filter = ({ name, value, onChange, type, label }) => {
     const uniqueID = nanoid();
 
     return <>
