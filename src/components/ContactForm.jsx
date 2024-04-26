@@ -12,8 +12,10 @@
 
 import React, { useState } from "react";
 import { nanoid } from "nanoid";
+import PropTypes from "prop-types";
+import { ContactData, ContactInput, ContactSubmit, ContactLabel } from "../styled/styled-contactForm"
 
-export const Input = ({ onSubmit }) => {
+export const ContactForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({ name: "", number: "" });
 
   const handleChange = (event) => {
@@ -22,6 +24,9 @@ export const Input = ({ onSubmit }) => {
       ...prev,
       [name]: value,
     }));
+    // console.log(event.target)
+    // console.log(event.target.name)
+    // console.log(event.target.value)
   };
 
   const handleSubmit = (event) => {
@@ -30,13 +35,14 @@ export const Input = ({ onSubmit }) => {
     setFormData({ name: "", number: "" });
   };
 
-  const uniqueID = nanoid();
+  const uniqueIDName = nanoid();
+  const uniqueIDNumeber = nanoid();
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor={uniqueID}>Name</label>
-      <input
-        id={uniqueID}
+    <ContactData onSubmit={handleSubmit}>
+      <ContactLabel htmlFor={uniqueIDName}>Name</ContactLabel>
+      <ContactInput
+        id={uniqueIDName}
         name="name"
         value={formData.name}
         onChange={handleChange}
@@ -45,9 +51,9 @@ export const Input = ({ onSubmit }) => {
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         required
       />
-      <label htmlFor={uniqueID}>Number</label>
-      <input
-        id={uniqueID}
+      <ContactLabel htmlFor={uniqueIDNumeber}>Number</ContactLabel>
+      <ContactInput
+        id={uniqueIDNumeber}
         name="number"
         value={formData.number}
         onChange={handleChange}
@@ -56,7 +62,11 @@ export const Input = ({ onSubmit }) => {
         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
         required
       />
-      <button type="submit">Add contact</button>
-    </form>
+      <ContactSubmit  type="submit">Add contact</ContactSubmit>
+    </ContactData>
   );
 };
+
+ContactForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}

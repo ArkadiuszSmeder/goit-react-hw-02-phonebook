@@ -69,11 +69,12 @@
 // export default App;
 
 import React, { useState } from "react";
-import { Input } from "./components/Input";
+import { ContactForm } from "./components/ContactForm";
 import { Filter } from "./components/Filter";
 import { Contacts } from "./components/Contacts";
 import { INITIAL_STATE } from "./constants/initial-form-state";
 import { nanoid } from "nanoid";
+import { AppContainer } from "styled/styled-appContainer"; 
 
 function App() {
   const [userData, setUserData] = useState(INITIAL_STATE);
@@ -111,13 +112,13 @@ function App() {
   );
 
   return (
-    <div>
+    <AppContainer>
       <h1>Phonebook</h1>
-      <Input onSubmit={handleFormSubmit} />
+      <ContactForm onSubmit={handleFormSubmit} />
       <h2>Contacts</h2>
       <Filter type="text" label="Find contacts by name" name="filter" value={userData.filter} onChange={(e) => setUserData({ ...userData, filter: e.target.value })}/>
       <Contacts contacts={filteredContacts} onDeleteContact={handleDeleteContact} />
-    </div>
+    </AppContainer>
   );
 }
 
